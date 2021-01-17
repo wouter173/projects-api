@@ -36,6 +36,7 @@ func AllHandler(c *fiber.Ctx) error {
 	json, _ := json.Marshal(results)
 
 	c.Set("content-type", "application/json")
+	c.Set("Access-Control-Allow-Origin", "*")
 	return c.Send(json)
 }
 
@@ -64,5 +65,6 @@ func IDHandler(c *fiber.Ctx) error {
 	json, _ := json.Marshal(result)
 
 	c.Set("content-type", "application/json")
+	c.Set("Access-Control-Allow-Origin", "*")
 	return c.Send(json)
 }

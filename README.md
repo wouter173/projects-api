@@ -20,3 +20,8 @@ $ go run *.go
 ### Notes
 This project is build to deploy on a dokku stack.
 But it can be deploy to an heroku app.
+
+
+### TODO
+
+- [ ] fix the CORS header to only allow from wouterdb.nl wouter173.nl and localhost for dev
