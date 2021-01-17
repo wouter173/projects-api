@@ -11,6 +11,9 @@ import (
 
 //AllHandler get all projects from db
 func AllHandler(c *fiber.Ctx) error {
+	c.Set("content-type", "application/json")
+	c.Set("Access-Control-Allow-Origin", "*")
+
 	collection, err := GetMongoCollection(os.Getenv("DB"), os.Getenv("COLL"))
 
 	if err != nil {
@@ -35,13 +38,14 @@ func AllHandler(c *fiber.Ctx) error {
 
 	json, _ := json.Marshal(results)
 
-	c.Set("content-type", "application/json")
-	c.Set("Access-Control-Allow-Origin", "*")
 	return c.Send(json)
 }
 
 //IDHandler get 1 project from db based on id
 func IDHandler(c *fiber.Ctx) error {
+	c.Set("content-type", "application/json")
+	c.Set("Access-Control-Allow-Origin", "*")
+
 	collection, err := GetMongoCollection(os.Getenv("DB"), os.Getenv("COLL"))
 
 	if err != nil {
@@ -64,7 +68,5 @@ func IDHandler(c *fiber.Ctx) error {
 
 	json, _ := json.Marshal(result)
 
-	c.Set("content-type", "application/json")
-	c.Set("Access-Control-Allow-Origin", "*")
 	return c.Send(json)
 }
