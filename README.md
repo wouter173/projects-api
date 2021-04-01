@@ -1,27 +1,19 @@
 # projects-api
 
-API for my projects display on https://wouterdb.nl/ from mongodb.<br>
-The API is written in Go using fiber and the official mongodb library.<br>
-Currently live on https://projects.wouter.cloud.<br>
+API for my projects display on https://wouterdb.nl/.<br>
+The API is written in Go using fiber.<br>
 
 ### env
 ```sh
-DBURI > mongodb connection string 
-DB > database name
-COLL > collection name
+PROJECTS_PATH > the path the projects are on
 PORT > the port the server goes live on
 ```
 
 ### run
 ```sh
-$ go run *.go
+$ go run .
 ```
-
-### Notes
-This project is build to deploy on a dokku stack.
-But it can be deploy to an heroku app.
-
 
 ### TODO
 
-- [ ] fix the CORS header to only allow from wouterdb.nl wouter173.nl and localhost for dev
+- [ ] feature: set the CORS header to only allow requests from wouterdb.nl wouter173.nl and localhost for dev

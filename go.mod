@@ -1,9 +1,8 @@
-module wouter.cloud/projects
+module github.com/wouter173/projects
 
 go 1.15
 
 require (
-	github.com/gofiber/fiber/v2 v2.3.2
+	github.com/gofiber/fiber/v2 v2.7.1
 	github.com/joho/godotenv v1.3.0
-	go.mongodb.org/mongo-driver v1.4.4
 )

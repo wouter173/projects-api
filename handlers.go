@@ -1,72 +1,52 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
+	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
-	"go.mongodb.org/mongo-driver/bson"
 )
 
-//AllHandler get all projects from db
+//Error struct
+type Error struct {
+	Message string
+}
+
+//AllHandler get all projects in defined path
 func AllHandler(c *fiber.Ctx) error {
 	c.Set("content-type", "application/json")
 	c.Set("Access-Control-Allow-Origin", "*")
 
-	collection, err := GetMongoCollection(os.Getenv("DB"), os.Getenv("COLL"))
+	var files []string
+	dir, err := ioutil.ReadDir(os.Getenv("PROJECTS_PATH"))
 
 	if err != nil {
-		return c.Status(500).JSON(err.Error())
+		res, _ := json.Marshal(Error{Message: "Path not found."})
+		return c.Send(res)
 	}
 
-	filter := bson.M{}
-	var results []Project
-
-	cur, err := collection.Find(context.Background(), filter)
-	defer cur.Close(context.Background())
-
-	if err != nil {
-		return c.Status(500).JSON(err.Error())
+	for _, file := range dir {
+		files = append(files, strings.TrimRight(file.Name(), ".md"))
 	}
 
-	cur.All(context.Background(), &results)
+	res, _ := json.Marshal(files)
 
-	if results == nil {
-		return c.Status(404).JSON("Not found")
-	}
-
-	json, _ := json.Marshal(results)
-
-	return c.Send(json)
+	return c.Send(res)
 }
 
-//IDHandler get 1 project from db based on id
+//IDHandler get 1 project from defined path and print it
 func IDHandler(c *fiber.Ctx) error {
-	c.Set("content-type", "application/json")
 	c.Set("Access-Control-Allow-Origin", "*")
 
-	collection, err := GetMongoCollection(os.Getenv("DB"), os.Getenv("COLL"))
+	file, err := ioutil.ReadFile(os.Getenv("PROJECTS_PATH") + "/" + c.Params("id") + ".md")
 
 	if err != nil {
-		return c.Status(500).JSON(err.Error())
+		c.Set("Content-type", "application/json")
+		res, _ := json.Marshal(Error{Message: "Project not found."})
+		return c.Send(res)
 	}
 
-	var filter bson.M
-
-	if c.Params("id") != "" {
-		filter = bson.M{"id": c.Params("id")}
-	}
-
-	var result Project
-
-	collection.FindOne(context.Background(), filter).Decode(&result)
-
-	if result.ID == "" {
-		return c.Status(404).JSON("Not found")
-	}
-
-	json, _ := json.Marshal(result)
-
-	return c.Send(json)
+	return c.SendString(string(file))
 }
