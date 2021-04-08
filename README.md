@@ -26,17 +26,18 @@ PORT > the port the server goes live on
 ```
 
 ### run
+
+Run from source:
 ```sh
 $ go run .
 ```
 
-OR
-
+Or build a docker image:
 ```
-$ docker build -t projects:latest .
-$ docker run projects:latest
+$ make build
 ```
 
 ### TODO
 
 - [ ] feature: set the CORS header to only allow requests from wouterdb.nl wouter173.nl and localhost for dev
+- [ ] fix: fix in GetMeta that if there is no metadata just serve back and empty metadata struct
