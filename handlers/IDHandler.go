@@ -24,5 +24,9 @@ func IDHandler(c *fiber.Ctx) error {
 
 	str := strings.Split(string(file), "---")
 
+	if len(str) == 1 {
+		return c.SendString(str[0])
+	}
+
 	return c.SendString(str[2])
 }

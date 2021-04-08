@@ -12,7 +12,7 @@ func IDMetaHandler(c *fiber.Ctx) error {
 	c.Set("content-type", "application/json")
 	c.Set("Access-Control-Allow-Origin", "*")
 
-	meta, err := misc.GetProject(c.Params("id"))
+	meta, err := misc.GetMeta(c.Params("id"))
 
 	if err != nil {
 		res, _ := json.Marshal(structs.Error{Message: "Project not found."})

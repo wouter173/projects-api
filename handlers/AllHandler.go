@@ -13,7 +13,7 @@ func AllHandler(c *fiber.Ctx) error {
 	c.Set("content-type", "application/json")
 	c.Set("Access-Control-Allow-Origin", "*")
 
-	metas, err := misc.GetAllProjects()
+	metas, err := misc.GetAllMeta()
 
 	if err != nil {
 		res, _ := json.Marshal(structs.Error{Message: err.Error()})
