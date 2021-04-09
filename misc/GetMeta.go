@@ -21,10 +21,11 @@ func GetMeta(name string) (structs.Meta, error) {
 	str := strings.Split(string(content), "---")
 
 	if len(str) == 1 {
-		return structs.Meta{Name: name}, nil
+		return structs.Meta{Url: name}, nil
 	}
 
-	var meta structs.Meta
+	meta := structs.Meta{Url: name}
+
 	yaml.Unmarshal([]byte(str[1]), &meta)
 
 	return meta, nil

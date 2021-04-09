@@ -42,4 +42,4 @@ $ make build
 - [x] feature: set the CORS header to only allow requests from wouterdb.nl wouter173.nl and localhost for dev
 - [x] fix: fix in GetMeta that if there is no metadata just serve back and empty metadata struct
 - [ ] split the links into github and live
-- [ ] seperate url field to query so the names can have dots
+- [x] seperate url field to query so the names can have dots
