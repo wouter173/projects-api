@@ -2,7 +2,7 @@ package structs
 
 //Meta struct
 type Meta struct {
-	Url         string
+	Url         string `json:"url"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Thumb       string `json:"thumb"`
