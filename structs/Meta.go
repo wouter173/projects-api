@@ -7,7 +7,7 @@ type Meta struct {
 	Description string `json:"description"`
 	Thumb       string `json:"thumb"`
 	Tags        []Tag  `json:"tags"`
-	Links       []Link `json:"links"`
+	Links       Links  `json:"links"`
 }
 
 //Tag struct
@@ -18,6 +18,7 @@ type Tag struct {
 }
 
 // Link struct
-type Link struct {
-	Url string `json:"url"`
+type Links struct {
+	Github string `json:"github"`
+	Live   string `json:"live"`
 }
