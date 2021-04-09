@@ -10,11 +10,9 @@ import (
 
 //AllHandler get all projects in defined path
 func AllHandler(c *fiber.Ctx) error {
-	c.Set("content-type", "application/json")
-	c.Set("Access-Control-Allow-Origin", "*")
-
 	metas, err := misc.GetAllMeta()
 
+	c.Set("content-type", "application/json")
 	if err != nil {
 		res, _ := json.Marshal(structs.Error{Message: err.Error()})
 		return c.Send(res)

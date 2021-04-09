@@ -9,9 +9,6 @@ import (
 )
 
 func IDMetaHandler(c *fiber.Ctx) error {
-	c.Set("content-type", "application/json")
-	c.Set("Access-Control-Allow-Origin", "*")
-
 	meta, err := misc.GetMeta(c.Params("id"))
 
 	if err != nil {
@@ -19,6 +16,7 @@ func IDMetaHandler(c *fiber.Ctx) error {
 		return c.Send(res)
 	}
 
+	c.Set("content-type", "application/json")
 	res, _ := json.Marshal(meta)
 	return c.Send(res)
 }

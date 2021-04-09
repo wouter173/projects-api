@@ -12,8 +12,6 @@ import (
 
 //IDHandler get 1 project from defined path and print it
 func IDHandler(c *fiber.Ctx) error {
-	c.Set("Access-Control-Allow-Origin", "*")
-
 	file, err := ioutil.ReadFile(os.Getenv("PROJECTS_PATH") + "/" + c.Params("id") + ".md")
 
 	if err != nil {
