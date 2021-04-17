@@ -13,7 +13,7 @@ func IDMetaHandler(c *fiber.Ctx) error {
 
 	if err != nil {
 		res, _ := json.Marshal(structs.Error{Message: "Project not found."})
-		return c.Send(res)
+		return c.Status(404).Send(res)
 	}
 
 	c.Set("content-type", "application/json")

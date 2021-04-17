@@ -17,7 +17,7 @@ func IDHandler(c *fiber.Ctx) error {
 	if err != nil {
 		c.Set("Content-type", "application/json")
 		res, _ := json.Marshal(structs.Error{Message: "Project not found."})
-		return c.Send(res)
+		return c.Status(404).Send(res)
 	}
 
 	str := strings.Split(string(file), "---")

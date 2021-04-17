@@ -15,7 +15,7 @@ func AllHandler(c *fiber.Ctx) error {
 	c.Set("content-type", "application/json")
 	if err != nil {
 		res, _ := json.Marshal(structs.Error{Message: err.Error()})
-		return c.Send(res)
+		return c.Status(400).Send(res)
 	}
 
 	res, _ := json.Marshal(metas)
